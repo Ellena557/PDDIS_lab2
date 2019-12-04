@@ -1,6 +1,8 @@
-package hello;
+package hello.useless;
 
 import java.util.concurrent.atomic.AtomicLong;
+
+import hello.useless.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

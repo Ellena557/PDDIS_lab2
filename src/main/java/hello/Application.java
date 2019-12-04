@@ -1,15 +1,10 @@
 package hello;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 @SpringBootApplication
 public class Application {
@@ -21,6 +16,7 @@ public class Application {
         Service myService = new MyService();
         Double result = myService.findMax(30);
         System.out.println("Max dollar: " + result);
+
     }
 
 //    public static double findMaxDollar() {
@@ -42,4 +38,8 @@ public class Application {
 //
 //        return maxDollarValue;
 //    }
+
+    public static interface MaxDollarFinder {
+        public List getMaxCurrency();
+    }
 }

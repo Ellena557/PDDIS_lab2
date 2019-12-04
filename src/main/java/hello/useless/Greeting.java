@@ -1,4 +1,4 @@
-package hello;
+package hello.useless;
 
 public class Greeting {
 
