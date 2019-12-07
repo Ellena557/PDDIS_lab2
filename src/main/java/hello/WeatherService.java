@@ -17,7 +17,7 @@ public class WeatherService {
 
         String mySecretKey = "ac1830efeff59c748d212052f27d49aa";
         String obligatoryForecastStart = "https://api.darksky.net/forecast/ac1830efeff59c748d212052f27d49aa/";
-        String LAcoordinates = "34.053044,118.243750,";
+        String LAcoordinates = "34.053044,-118.243750,";
         String exclude = "exclude=daily";
 
         RestTemplate restTemplate = new RestTemplate();

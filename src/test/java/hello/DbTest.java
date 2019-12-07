@@ -26,21 +26,30 @@ public class DbTest {
     @Autowired
     private FinalRbkService finalRbkService;
 
-    @Test
-    public void testGetMaxFromDb() {
-        dbService.getMaxFromDb();
-        getMaxFromDb();
-    }
+//    @Test
+//    public void testGetMaxFromDb() {
+//        dbService.getMaxFromDb();
+//        getMaxFromDb();
+//    }
 
-    @Test
-    public void getMaxFromDb() {
-        FinalRbkService serviceMock = Mockito.spy(finalRbkService);
-        MyService myService = new MyService();
-        //Mockito.when(serviceMock.findTodayMax(getDateNoTime())).thenReturn(myService.findMax(30));
-        Mockito.when(serviceMock.findTodayMax(getDateNoTime())).thenReturn(68.999);
-        //Mockito.when(serviceMock.getMaxFromServer()).thenReturn(68.999);
-        Assert.assertEquals(68.999, serviceMock.getMaxCurrency(), 1e-4);
-    }
+    //    @Test
+//    public void getMaxFromDb() {
+//        FinalRbkService serviceMock = Mockito.spy(finalRbkService);
+//        MyService myService = new MyService();
+//        //Mockito.when(serviceMock.findTodayMax(getDateNoTime())).thenReturn(myService.findMax(30));
+//        Mockito.when(serviceMock.findTodayMax(getDateNoTime())).thenReturn(68.999);
+//        //Mockito.when(serviceMock.getMaxFromServer()).thenReturn(68.999);
+//        Assert.assertEquals(68.999, serviceMock.getMaxCurrency(), 1e-4);
+//    }
+
+@Test
+public void getMaxRightFromDb() {
+    finalRbkService.saveMaxOfAllDollars();
+    Double dol = finalRbkService.findTodayMax(getDateNoTime());
+    //System.out.println(dol + " PPP");
+    Assert.assertTrue(dol > 0);
+}
+
 
     @Test
     public void accessToDb(){

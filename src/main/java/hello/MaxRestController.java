@@ -1,5 +1,6 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MaxRestController {
 
+    @Autowired
+    private FinalRbkService finalRbkService;
     MyService myService;
 
     public MaxRestController(MyService myService) {
@@ -20,8 +23,8 @@ public class MaxRestController {
     @RequestMapping("/getNiceMax")
     public Double getMaxDollar(){
 
-        Double maxDollar = myService.findMax(30);
+        //Double maxDollar = myService.findMax(30);
 
-        return maxDollar;
+        return finalRbkService.getMaxCurrency();
     }
 }

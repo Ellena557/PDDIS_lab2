@@ -3,6 +3,7 @@ package hello;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
@@ -57,9 +58,9 @@ public class FinalRbkService {
         } else return Double.valueOf(-1);
     }
 
+    @RequestMapping("/getRBK")
     public Double getMaxCurrency() {
         Double maxCurrency;
-        System.out.println("HOHOHO");
 
         Double maxDollarDb = findTodayMax(getDateNoTime());
         if (maxDollarDb != -1) {
