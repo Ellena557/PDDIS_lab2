@@ -1,16 +1,18 @@
 package hello;
 
+import hello.JsonParsing.JsonParser2;
 import hello.JsonParsing.JsonTempGetterVar1;
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 @Service
-public class WeatherService {
+public class WeatherService2 {
 
 
     // here we go to dark sky service
@@ -30,15 +32,15 @@ public class WeatherService {
         return info;
     }
 
-    public Double getTemperatureFromInfo(String date) throws JSONException {
+    public Double getTemperatureFromInfo(String date) throws IOException {
         String info = getTodayWeather(date);
-        JsonTempGetterVar1 jsonGetter = new JsonTempGetterVar1(info);
-        Double curTemp = Double.parseDouble(jsonGetter.getTemperature());
+        JsonParser2 jsonGetter = new JsonParser2(info);
+        Double curTemp = jsonGetter.getTemperature();
         return curTemp;
     }
 
 
-    public ArrayList<Double> getTemperatureForLastMonth() throws JSONException {
+    public ArrayList<Double> getTemperatureForLastMonth() throws IOException {
         ArrayList<Double> temps = new ArrayList<>();
 
         long currentDayInSec = Calendar.getInstance().getTimeInMillis() / 1000;
@@ -53,7 +55,7 @@ public class WeatherService {
         return temps;
     }
 
-    public ArrayList<Double> getTemperatureForLastDays(int days) throws JSONException {
+    public ArrayList<Double> getTemperatureForLastDays(int days) throws IOException {
         ArrayList<Double> temps = new ArrayList<>();
 
         long currentDayInSec = Calendar.getInstance().getTimeInMillis() / 1000;
@@ -61,7 +63,7 @@ public class WeatherService {
 
         for (int i = 0; i < days; i++) {
             long curDateSec = currentDayInSec - i * oneDayInSec;
-            Double curTemp = getTemperatureFromInfo(""+curDateSec);
+            Double curTemp = getTemperatureFromInfo("" + curDateSec);
             temps.add(curTemp);
         }
 

@@ -1,4 +1,4 @@
-package hello;
+package hello.JsonParsing;
 import com.google.gson.Gson;
 import org.json.*;
 

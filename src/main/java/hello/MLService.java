@@ -1,6 +1,7 @@
 package hello;
 
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class MLService {
     //@Autowired
     private WeatherService weatherService = new WeatherService();
 
-    public Double predictTemp(Double currency){
+    public Double predictTemp(Double currency) throws JSONException {
 
         SimpleRegression regression = new SimpleRegression();
 
@@ -33,5 +34,25 @@ public class MLService {
         regression.addData(info);
 
         return regression.predict(currency);
+    }
+
+    public Double predictDollar(Double temp) throws JSONException {
+
+        SimpleRegression regression = new SimpleRegression();
+
+        List<Double> dollarVals = finalRbkService.getCurrencyForMonth();
+        List<Double> weatherVals = weatherService.getTemperatureForLastDays(dollarVals.size());
+
+        int nDays = dollarVals.size();
+
+        double info[][] = new double[2][nDays];
+        for (int i = 0; i < nDays; i++) {
+            info[1][i] = dollarVals.get(i);
+            info[0][i] = weatherVals.get(i);
+        }
+
+        regression.addData(info);
+
+        return regression.predict(temp);
     }
 }

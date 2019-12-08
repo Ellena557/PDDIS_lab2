@@ -1,13 +1,10 @@
 package hello;
 
+import hello.JsonParsing.JsonTempGetterVar1;
 import org.json.JSONException;
-import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 public class ExtraTest {
 
@@ -15,7 +12,7 @@ public class ExtraTest {
 
 
     @Test
-    public void checkRunTime(){
+    public void checkRunTime() throws JSONException {
         //weatherService.getTodayWeather(getDateNoTimeInMillis()+"");
         //weatherService.getTemperatureFromInfo(weatherService.getTodayWeather(getDateNoTimeInMillis()+""));
         System.out.println(weatherService.getTemperatureForLastMonth());
