@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "3bf6cae6-1dc3-41f2-b5f4-1b31a6a29cff",
+		"name": "PdrisLab4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ServiceTests",
+			"item": [
+				{
+					"name": "rbkTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d02f2f7-3241-49d6-8db6-7503e2b4c02c",
+								"exec": [
+									"pm.test(\"Status\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The currency is not crazy\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"6\");",
+									"});",
+									"",
+									"pm.test(\"Pozitive\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result).to.be.above(0);",
+									"});",
+									"",
+									"pm.test(\"Normal currency\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result).to.be.below(100);",
+									"});",
+									"",
+									"pm.test(\"NotEmpty\", function () {",
+									"    var res = pm.response.json();",
+									"    pm.expect(res.result);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/getNiceMax",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getNiceMax"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "weatherTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7fec7312-1df5-406f-88e4-735afc310e3e",
+								"exec": [
+									"pm.test(\"Status\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"NotEmpty\", function () {",
+									"    var res = pm.response.json();",
+									"    pm.expect(res.temp);",
+									"});",
+									"",
+									"pm.test(\"Length\", function () {",
+									"    var res = pm.response.json();",
+									"    pm.expect(res.temp.length).to.eql(5);",
+									"});",
+									"",
+									"pm.test(\"Length2\", function () {",
+									"    var res = pm.response.json();",
+									"    pm.expect(res.temp).to.have.lengthOf(5);",
+									"});",
+									"",
+									"pm.test(\"Not too low\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.temp[0]).to.be.above(-50);",
+									"});",
+									"",
+									"pm.test(\"Not too high\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.temp[0]).to.be.below(150);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/purepostWeather?days=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"purepostWeather"
+							],
+							"query": [
+								{
+									"key": "days",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mlTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6358e614-0a63-4139-bde9-c48fbcaef77a",
+								"exec": [
+									"pm.test(\"Status\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"NotEmpty\", function () {",
+									"    var res = pm.response.json();",
+									"    pm.expect(res.result);",
+									"});",
+									"",
+									"pm.test(\"Pozitive\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result).to.be.above(0);",
+									"});",
+									"",
+									"pm.test(\"Normal currency\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result).to.be.below(100);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/predictDollar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"predictDollar"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
