@@ -37,7 +37,8 @@ public class WeatherServiceTest {
         WeatherService myService = new WeatherService();
         WeatherService serviceMock = Mockito.spy(myService);
         Mockito.when(serviceMock.getTodayWeather("" + getDateNoTimeInMillis())).thenReturn(wLA);
-        Double weather = serviceMock.getTemperatureForLastDays(1).get(0);
+        //Double weather = serviceMock.getTemperatureForLastDays(1).get(0);
+        Double weather = serviceMock.getTemperatureFromInfo("" + getDateNoTimeInMillis());
         System.out.println(weather);
 
         Assert.assertEquals(60.41, weather, 1e-4);
@@ -50,7 +51,8 @@ public class WeatherServiceTest {
         WeatherService2 myService = new WeatherService2();
         WeatherService2 serviceMock = Mockito.spy(myService);
         Mockito.when(serviceMock.getTodayWeather("" + getDateNoTimeInMillis())).thenReturn(wLA);
-        Double weather = serviceMock.getTemperatureForLastDays(1).get(0);
+        //Double weather = serviceMock.getTemperatureForLastDays(1).get(0);
+        Double weather = serviceMock.getTemperatureFromInfo("" + getDateNoTimeInMillis());
 
         Assert.assertEquals(60.41, weather, 1e-4);
     }
