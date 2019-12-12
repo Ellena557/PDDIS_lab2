@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 public class JsonParser2 {
-    public String info;
+    private String info;
 
     public JsonParser2(String info) {
         this.info = info;
@@ -15,7 +15,7 @@ public class JsonParser2 {
     public double getTemperature() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         WTemperature wTemperature = mapper.readValue(info, WTemperature.class);
-        double temp = wTemperature.hourly.data.get(0).temperature;
+        double temp = wTemperature.getHourly().getData().get(0).getTemperature();
         return temp;
     }
 }
