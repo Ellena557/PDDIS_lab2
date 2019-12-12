@@ -4,5 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TempOneDayData {
-    public double temperature;
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    private double temperature;
 }
