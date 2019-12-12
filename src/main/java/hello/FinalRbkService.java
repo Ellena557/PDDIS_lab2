@@ -30,7 +30,7 @@ public class FinalRbkService {
     private static MyService myService = new MyService();
 
 
-    @Transactional
+    //@Transactional
     public void saveNewLine(Double dollar) {
         // here we save no time because we need only days (time will be 00:00:00).
         String currentDate = getDateNoTime();
@@ -48,7 +48,7 @@ public class FinalRbkService {
         saveNewLine(maxCurrency);
     }
 
-    @Transactional
+    //@Transactional
     public Double findTodayMax(String date) {
         Optional<RbkDb> dollar = dbWorker.findByDate(date);
         //return dollar.map(RbkDb::getCurrency);
