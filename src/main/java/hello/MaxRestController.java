@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 @RestController
@@ -33,19 +34,21 @@ public class MaxRestController {
     @Autowired
     private WeatherService2 weatherService2;
 
-    @RequestMapping("/getNiceMax")
-    public Double getMaxDollar() {
+    @GetMapping(value = "/getNiceMax")
+    public SimpleGet getMaxDollar() {
         //Double maxDollar = myService.findMax(30);
-        return finalRbkService.getMaxCurrency();
+        SimpleGet ans = new SimpleGet();
+        ans.result = finalRbkService.getMaxCurrency();
+        return ans;
     }
 
-    @RequestMapping("/getWeather")
+    @GetMapping(value = "/getWeather")
     public Double getTodayWeather() throws JSONException {
         //Double maxDollar = myService.findMax(30);
         return weatherService.getTemperatureForLastDays(1).get(0);
     }
 
-    @RequestMapping(value = "/postWeather", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/postWeather", method = RequestMethod.GET)
     public PostResponce getWeatherTemps(int days) throws JSONException {
         PostResponce responce = new PostResponce();
         int mdays = Math.max(days, 1);
@@ -54,10 +57,22 @@ public class MaxRestController {
         return responce;
     }
 
+    @RequestMapping(value = "/purepostWeather", method = RequestMethod.POST)
+    public PostResponce puregetWeatherTemps(int days) throws JSONException {
+        PostResponce responce = new PostResponce();
+        int mdays = Math.max(days, 1);
+        ArrayList<Double> temps = weatherService.getTemperatureForLastDays(mdays);
+        responce.temp = temps;
+        return responce;
+    }
+
     @RequestMapping(value = "/predictDollar", method = RequestMethod.GET)
-    public Double predictDollar(Double temp) throws JSONException {
+    public SimpleGet predictDollar() throws JSONException {
+        SimpleGet simpleGet = new SimpleGet();
+        Double temp = weatherService.getTomorrowWeather();
         Double dollar = mlService.predictDollar(temp);
-        return dollar;
+        simpleGet.result = dollar;
+        return simpleGet;
     }
 
     //http://localhost:8080/predictTemp?dollar=22.3
