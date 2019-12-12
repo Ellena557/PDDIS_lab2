@@ -1,7 +1,7 @@
 package hello;
 
 public class SimpleGet {
-    private Double result;
+    protected Double result;
 
 
     public Double getResult() {
