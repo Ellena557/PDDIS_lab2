@@ -42,7 +42,7 @@ public class WeatherService {
         ArrayList<Double> temps = new ArrayList<>();
 
         long currentDayInSec = Calendar.getInstance().getTimeInMillis() / 1000;
-        long oneDayInSec = 24 * 60 * 60;
+        long oneDayInSec = 24 * 60 * 60L;
 
         for (int i = 0; i < 30; i++) {
             long curDateSec = currentDayInSec - i * oneDayInSec;
@@ -57,7 +57,7 @@ public class WeatherService {
         ArrayList<Double> temps = new ArrayList<>();
 
         long currentDayInSec = Calendar.getInstance().getTimeInMillis() / 1000;
-        long oneDayInSec = 24 * 60 * 60;
+        long oneDayInSec = 24 * 60 * 60L;
 
         for (int i = 0; i < days; i++) {
             long curDateSec = currentDayInSec - i * oneDayInSec;
@@ -66,5 +66,12 @@ public class WeatherService {
         }
 
         return temps;
+    }
+
+    public Double getTomorrowWeather() throws JSONException {
+        long currentDayInSec = Calendar.getInstance().getTimeInMillis() / 1000;
+        long tomorrow = currentDayInSec + 60 * 60 * 24;
+        Double tomorrowWeather = getTemperatureFromInfo(""+tomorrow);
+        return tomorrowWeather;
     }
 }
